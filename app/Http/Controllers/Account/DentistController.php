@@ -21,4 +21,17 @@ class DentistController extends DashboardController
             'plans' => $treatmentPlans,
         ]);
     }
+
+    public function getPatients(Request $request)
+    {
+        $patients = collect([]);
+
+        if (principal()->isDentist()) {
+            $patients = principal()->patients;
+        }
+
+        return view('account.dentist.patients.index', [
+            'patients' => $patients,
+        ]);
+    }
 }

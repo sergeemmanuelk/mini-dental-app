@@ -55,4 +55,15 @@ class Dentist extends Authenticatable
     public function treatmentPlans(){
         return $this->hasMany(TreatmentPlan::class, 'dentist_id', 'id');
     }
+
+    public function patients() {
+        return $this->hasManyThrough(
+            Patient::class,
+            TreatmentPlan::class,
+            'dentist_id',
+            'id',
+            'id',
+            'patient_id'
+        );
+    }
 }
